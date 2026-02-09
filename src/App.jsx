@@ -1,245 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { Menu, X, ArrowRight, ArrowLeft, Building2, Users, TrendingUp, Handshake, Mail, CheckCircle, ChevronRight, BarChart3, Microscope, ShieldCheck, XCircle, Loader2, Quote, Lock, FileText, Download, Upload, Trash2, Plus } from 'lucide-react';
-
-// FIREBASE IMPORTS
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
-// ------------------------------------------------------------------
-// 🔴 PASTE YOUR FIREBASE CONFIG HERE
-// Replace the values below with the ones from your Firebase Console
-// ------------------------------------------------------------------
-const firebaseConfig = {
-  apiKey: "AIzaSyA7LVkRXJZ_SpOV5Qhbqs5_2PT40_TZ_Dg",
-  authDomain: "wallander-group.firebaseapp.com",
-  projectId: "wallander-group",
-  storageBucket: "wallander-group.firebasestorage.app",
-  messagingSenderId: "163059338024",
-  appId: "1:163059338024:web:67011ae8172a3d41d39e1d",
-  measurementId: "G-JHCF6BNS3N"
-};
-;
-
-// Initialize Firebase (Safely check if config is real)
-let db, storage;
-try {
-  if (firebaseConfig.apiKey !== "AIzaSy...") {
-    const app = initializeApp(firebaseConfig);
-    db = getFirestore(app);
-    storage = getStorage(app);
-  }
-} catch (e) {
-  console.error("Firebase init error:", e);
-}
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Menu, X, ArrowRight, ArrowLeft, Building2, Users, TrendingUp, Handshake, Mail, CheckCircle, ChevronRight, BarChart3, Microscope, ShieldCheck, XCircle, Loader2, Quote, Lock, FileText, Download } from 'lucide-react';
 
 // ==========================================
-// PAGE: ADMIN DASHBOARD (NEW)
-// ==========================================
-const AdminPortal = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [passwordInput, setPasswordInput] = useState('');
-  const [uploading, setUploading] = useState(false);
-  
-  // New Document Form
-  const [docTitle, setDocTitle] = useState('');
-  const [docDate, setDocDate] = useState('');
-  const [docFile, setDocFile] = useState(null);
-  
-  // List of existing docs
-  const [docs, setDocs] = useState([]);
-
-  // Fetch docs on load (if auth)
-  useEffect(() => {
-    if (isAuthenticated) fetchDocs();
-  }, [isAuthenticated]);
-
-  const fetchDocs = async () => {
-    if (!db) return;
-    try {
-      const q = query(collection(db, "partnerDocs"), orderBy("date", "desc"));
-      const querySnapshot = await getDocs(q);
-      const docsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setDocs(docsData);
-    } catch (error) {
-      console.error("Error fetching docs:", error);
-    }
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Simple hardcoded admin password
-    if (passwordInput === 'GreatCod26!') setIsAuthenticated(true);
-    else alert("Incorrect Admin Password");
-  };
-
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    if (!db || !storage) return alert("Firebase not configured!");
-    if (!docFile) return alert("Please select a file.");
-
-    setUploading(true);
-    try {
-      // 1. Upload File to Storage
-      const storageRef = ref(storage, `partner-docs/${docFile.name}`);
-      await uploadBytes(storageRef, docFile);
-      const downloadURL = await getDownloadURL(storageRef);
-
-      // 2. Save Metadata to Firestore
-      await addDoc(collection(db, "partnerDocs"), {
-        title: docTitle,
-        date: docDate,
-        url: downloadURL,
-        createdAt: new Date()
-      });
-
-      alert("Document uploaded successfully!");
-      setDocTitle('');
-      setDocDate('');
-      setDocFile(null);
-      fetchDocs(); // Refresh list
-    } catch (error) {
-      console.error("Upload error:", error);
-      alert("Upload failed. Check console.");
-    } finally {
-      setUploading(false);
-    }
-  };
-
-  const handleDelete = async (id) => {
-    if(!confirm("Are you sure you want to delete this document?")) return;
-    try {
-      await deleteDoc(doc(db, "partnerDocs", id));
-      fetchDocs();
-    } catch (error) {
-      alert("Delete failed");
-    }
-  };
-
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-neutral-100 p-6">
-        <div className="bg-white p-8 rounded shadow-md max-w-sm w-full">
-          <h2 className="text-xl font-bold mb-4 font-serif">Admin Login</h2>
-          <form onSubmit={handleLogin} className="flex flex-col gap-4">
-            <input 
-              type="password" 
-              value={passwordInput} 
-              onChange={(e) => setPasswordInput(e.target.value)} 
-              placeholder="Admin Password"
-              className="border p-2 rounded"
-            />
-            <button className="bg-black text-white py-2 rounded">Login</button>
-          </form>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-neutral-50 p-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-serif">Library Admin</h1>
-          <Link to="/" className="text-sm underline">Back to Site</Link>
-        </div>
-
-        {/* Upload Form */}
-        <div className="bg-white p-6 rounded shadow-sm mb-8">
-          <h2 className="font-bold mb-4 flex items-center gap-2"><Upload size={18}/> Upload New Document</h2>
-          <form onSubmit={handleUpload} className="grid gap-4 md:grid-cols-3">
-            <input 
-              type="text" 
-              placeholder="Document Title (e.g. Q1 Report)" 
-              value={docTitle}
-              onChange={(e) => setDocTitle(e.target.value)}
-              className="border p-2 rounded w-full"
-              required
-            />
-            <input 
-              type="text" 
-              placeholder="Date Label (e.g. Jan 2026)" 
-              value={docDate}
-              onChange={(e) => setDocDate(e.target.value)}
-              className="border p-2 rounded w-full"
-              required
-            />
-            <div className="flex gap-2">
-              <input 
-                type="file" 
-                onChange={(e) => setDocFile(e.target.files[0])}
-                className="border p-1 rounded w-full text-sm"
-                required
-              />
-              <button disabled={uploading} className="bg-emerald-600 text-white px-4 py-2 rounded font-bold whitespace-nowrap">
-                {uploading ? "..." : "Upload"}
-              </button>
-            </div>
-          </form>
-        </div>
-
-        {/* Existing Docs List */}
-        <div className="bg-white rounded shadow-sm overflow-hidden">
-          <div className="p-4 bg-neutral-100 border-b font-bold flex justify-between">
-            <span>Existing Documents</span>
-            <button onClick={fetchDocs} className="text-xs underline">Refresh</button>
-          </div>
-          {docs.length === 0 ? (
-            <div className="p-8 text-center text-neutral-400">No documents found. Upload one above.</div>
-          ) : (
-            <div className="divide-y">
-              {docs.map(doc => (
-                <div key={doc.id} className="p-4 flex items-center justify-between hover:bg-neutral-50">
-                  <div>
-                    <div className="font-bold">{doc.title}</div>
-                    <div className="text-xs text-neutral-500">{doc.date}</div>
-                  </div>
-                  <div className="flex gap-4">
-                    <a href={doc.url} target="_blank" rel="noreferrer" className="text-blue-600 text-sm underline">View</a>
-                    <button onClick={() => handleDelete(doc.id)} className="text-rose-500 hover:text-rose-700">
-                      <Trash2 size={18} />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// ==========================================
-// PAGE: PARTNER PORTAL (DYNAMIC)
+// PAGE: PARTNER PORTAL (STATIC LIBRARY)
 // ==========================================
 const PartnerPortal = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [docs, setDocs] = useState([]);
-  const [loadingDocs, setLoadingDocs] = useState(false);
 
-  // Fetch docs when authenticated
-  useEffect(() => {
-    if (isAuthenticated && db) {
-      setLoadingDocs(true);
-      const q = query(collection(db, "partnerDocs"), orderBy("date", "desc"));
-      getDocs(q).then((snapshot) => {
-        const docsData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setDocs(docsData);
-        setLoadingDocs(false);
-      }).catch(err => {
-        console.error(err);
-        setLoadingDocs(false);
-      });
+  // ------------------------------------------------------
+  // 🔴 LIBRARY CONFIGURATION
+  // To add a new document:
+  // 1. Drop the PDF into your 'public' folder.
+  // 2. Add a new line below: { title: 'Name', date: 'Date', filename: 'your-file.pdf' },
+  // ------------------------------------------------------
+  const partnerDocuments = [
+    { 
+      title: 'Q4 2025 Investor Letter', 
+      date: 'Dec 2025', 
+      filename: 'q4-letter.pdf' // Make sure this file exists in /public
+    },
+    { 
+      title: 'Annual Report 2025', 
+      date: 'Jan 2026', 
+      filename: 'annual-report-2025.pdf' 
     }
-  }, [isAuthenticated]);
+  ];
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const correctPassword = 'GreatCod26!'; 
+    const correctPassword = 'GreatCod26!'; // Password
+    
     if (passwordInput === correctPassword) {
       setIsAuthenticated(true);
       setErrorMsg('');
@@ -294,36 +87,28 @@ const PartnerPortal = () => {
                     <button onClick={() => setIsAuthenticated(false)} className="text-sm text-neutral-500 hover:text-black underline">Log Out</button>
                 </div>
                 
-                {loadingDocs ? (
-                  <div className="text-center py-10 text-neutral-400">Loading documents...</div>
-                ) : docs.length === 0 ? (
-                  <div className="text-center py-10 text-neutral-400 italic">
-                    No documents available yet. Check back soon.
-                  </div>
-                ) : (
-                  <div className="grid gap-4">
-                    {docs.map((doc) => (
-                      <a 
-                        key={doc.id}
-                        href={doc.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-between p-6 bg-neutral-50 border border-neutral-100 hover:border-black transition-colors group cursor-pointer no-underline"
-                      >
-                        <div className="flex items-center gap-4">
-                           <div className="w-10 h-10 bg-white border border-neutral-200 flex items-center justify-center text-neutral-500 group-hover:text-black group-hover:bg-neutral-100 transition-colors">
-                             <FileText size={20} />
-                           </div>
-                           <div>
-                              <span className="font-serif text-lg block text-neutral-800">{doc.title}</span>
-                              <span className="text-xs text-neutral-400 uppercase tracking-widest">{doc.date}</span>
-                           </div>
-                        </div>
-                        <Download size={20} className="text-neutral-400 group-hover:text-black" />
-                      </a>
-                    ))}
-                  </div>
-                )}
+                <div className="grid gap-4">
+                  {partnerDocuments.map((doc, i) => (
+                    <a 
+                      key={i} 
+                      href={`/${doc.filename}`} // Links directly to public folder
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-6 bg-neutral-50 border border-neutral-100 hover:border-black transition-colors group cursor-pointer no-underline"
+                    >
+                      <div className="flex items-center gap-4">
+                         <div className="w-10 h-10 bg-white border border-neutral-200 flex items-center justify-center text-neutral-500 group-hover:text-black group-hover:bg-neutral-100 transition-colors">
+                           <FileText size={20} />
+                         </div>
+                         <div>
+                            <span className="font-serif text-lg block text-neutral-800">{doc.title}</span>
+                            <span className="text-xs text-neutral-400 uppercase tracking-widest">{doc.date}</span>
+                         </div>
+                      </div>
+                      <Download size={20} className="text-neutral-400 group-hover:text-black" />
+                    </a>
+                  ))}
+                </div>
                 <p className="mt-8 text-neutral-400 text-sm italic">
                     Note: This is a secure area. Please do not share these documents externally.
                 </p>
@@ -526,7 +311,7 @@ const Home = () => {
             <NavLink id="sellers" label="For Sellers" />
             <NavLink id="criteria" label="Criteria" />
             
-            {/* NEW: TOP LEVEL MENU ITEM FOR PARTNER PORTAL */}
+            {/* PARTNER PORTAL LINK */}
             <Link to="/partners" className="text-sm font-serif tracking-wide text-neutral-500 hover:text-black transition-colors duration-300 flex items-center gap-1">
               <Lock size={14} className="mb-0.5" /> Partners
             </Link>
@@ -785,7 +570,6 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/jan-wallander" element={<JanWallander />} />
         <Route path="/partners" element={<PartnerPortal />} />
-        <Route path="/admin" element={<AdminPortal />} />
       </Routes>
     </BrowserRouter>
   );
