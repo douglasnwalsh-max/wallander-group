@@ -18,14 +18,19 @@ const PartnerPortal = () => {
   // ------------------------------------------------------
   const partnerDocuments = [
     { 
-      title: 'Q4 2025 Investor Letter', 
-      date: 'Dec 2025', 
-      filename: 'q4-letter.pdf' // Make sure this file exists in /public
+      title: 'Decentralisation - Why and How to Make It Work by Jan Wallander', 
+      date: '2003', 
+      filename: 'Decentralisation - Why and How to Make It Work by Jan Wallander.pdf"' // Make sure this file exists in /public
     },
     { 
-      title: 'Annual Report 2025', 
-      date: 'Jan 2026', 
-      filename: 'annual-report-2025.pdf' 
+      title: 'Swedish Legacy of Decentralization', 
+      date: 'Mar 2025', 
+      filename: 'annual-report-2025.pdfSwedish-legacy-of-decentralization.pdf' 
+    },
+    { 
+      title: 'Confidence and Humility', 
+      date: 'Mar 2025', 
+      filename: 'confidence-and-humility-3.pdf' 
     }
   ];
 
