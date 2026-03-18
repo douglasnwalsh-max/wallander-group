@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { Menu, X, ArrowRight, ArrowLeft, Building2, Users, TrendingUp, Handshake, Mail, CheckCircle, ChevronRight, BarChart3, Microscope, Lock, FileText, Download, Target, ShieldCheck, Zap, Loader2, Heart, Award, Anchor } from 'lucide-react';
+import { Menu, X, ArrowRight, ArrowLeft, Building2, Users, TrendingUp, Handshake, Mail, CheckCircle, ChevronRight, BarChart3, Microscope, Lock, FileText, Download, Target, ShieldCheck, Zap, Loader2, Heart, Award, Anchor, Quote } from 'lucide-react';
 
 // ==========================================
 // PAGE: PARTNER PORTAL
@@ -334,8 +334,8 @@ const Home = () => {
         <div className="container mx-auto max-w-5xl">
           <div className="max-w-4xl animate-in fade-in slide-in-from-bottom-8 duration-700">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-black leading-[1.1] mb-8">
-              Building the home of choice for <br/>
-              <span className="italic">mission-critical, proprietary products.</span>
+              Building the home of choice for makers of
+              <span className="italic"> mission-critical, proprietary products.</span>
             </h1>
             <p className="text-lg md:text-xl text-neutral-600 mb-12 leading-relaxed max-w-2xl font-light">
               Wallander Group is a decentralized holding company assembling a collective of exceptional niche manufacturers. We acquire and partner with IP owners, and we invest in the next generation of leaders to carry your legacy forward.
