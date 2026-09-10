@@ -427,6 +427,103 @@ const Home = () => {
         </div>
       </section>
 
+      {/* About Us / Leadership Section */}
+      <section id="about" className="py-24 bg-white border-b border-neutral-200">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="mb-16 text-center max-w-3xl mx-auto">
+            <div className="inline-block px-3 py-1 bg-black text-white text-xs font-bold tracking-widest uppercase mb-6 font-serif">
+              Leadership & Stewardship
+            </div>
+            <h2 className="text-3xl md:text-5xl font-serif text-black leading-tight mb-6">
+              Partners who are in it for the long haul.
+            </h2>
+            <p className="text-lg text-neutral-600 font-light leading-relaxed">
+              This is where we grew up, went to school, and where we are raising our own families. We believe the small businesses woven into the fabric of our communities are worth preserving—not flipping—for the next generation.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+            {/* Doug Walsh */}
+            <div className="bg-neutral-50 border border-neutral-200 p-8 md:p-10 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:border-black transition-all hover:shadow-sm">
+              <div className="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-full overflow-hidden border-2 border-black/10 shadow-sm bg-neutral-200">
+                <img 
+                  src="/images/doug-walsh.jpg" 
+                  alt="Doug Walsh" 
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div className="flex-1 text-center sm:text-left">
+                <h3 className="text-2xl font-serif font-bold text-black mb-1">Doug Walsh</h3>
+                <div className="text-sm font-serif text-neutral-500 uppercase tracking-widest mb-3">Co-Founder</div>
+                <div className="inline-block bg-white border border-neutral-200 px-2.5 py-1 text-xs text-neutral-700 font-medium mb-4">
+                  West Point • HBS • Army Special Ops
+                </div>
+                <p className="text-neutral-600 font-light leading-relaxed text-sm mb-6">
+                  Former Army Special Operations officer and expert in building high-performance technical teams. Dedicated to preserving the precision and culture of New England’s technical firms. Doug and his wife reside in Quincy, MA with their two children and beloved mutt.
+                </p>
+                <div className="flex items-center justify-center sm:justify-start gap-4 pt-4 border-t border-neutral-200/80">
+                  <a 
+                    href="https://www.linkedin.com/in/douglas-walsh/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="inline-flex items-center gap-1.5 text-xs font-serif font-bold text-black hover:text-neutral-600 transition-colors"
+                  >
+                    <span>LinkedIn Profile</span>
+                    <ArrowRight size={13} />
+                  </a>
+                  <span className="text-neutral-300">•</span>
+                  <a 
+                    href="mailto:Doug@wallandergroup.com" 
+                    className="text-xs font-serif text-neutral-500 hover:text-black transition-colors"
+                  >
+                    Doug@wallandergroup.com
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Troy Renauld */}
+            <div className="bg-neutral-50 border border-neutral-200 p-8 md:p-10 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:border-black transition-all hover:shadow-sm">
+              <div className="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-full overflow-hidden border-2 border-black/10 shadow-sm bg-neutral-200">
+                <img 
+                  src="/images/troy-renauld.jpg" 
+                  alt="Troy Renauld" 
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div className="flex-1 text-center sm:text-left">
+                <h3 className="text-2xl font-serif font-bold text-black mb-1">Troy Renauld</h3>
+                <div className="text-sm font-serif text-neutral-500 uppercase tracking-widest mb-3">Co-Founder</div>
+                <div className="inline-block bg-white border border-neutral-200 px-2.5 py-1 text-xs text-neutral-700 font-medium mb-4">
+                  Investor • Engineer • Boston College
+                </div>
+                <p className="text-neutral-600 font-light leading-relaxed text-sm mb-6">
+                  Engineer and investor with over a decade of experience identifying durable businesses. Expert in resilient, technical business models and growth through principled acquisition. Troy and his wife reside in Reading, MA with their two sons and dog.
+                </p>
+                <div className="flex items-center justify-center sm:justify-start gap-4 pt-4 border-t border-neutral-200/80">
+                  <a 
+                    href="https://www.linkedin.com/in/troyr1/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="inline-flex items-center gap-1.5 text-xs font-serif font-bold text-black hover:text-neutral-600 transition-colors"
+                  >
+                    <span>LinkedIn Profile</span>
+                    <ArrowRight size={13} />
+                  </a>
+                  <span className="text-neutral-300">•</span>
+                  <a 
+                    href="mailto:Troy@wallandergroup.com" 
+                    className="text-xs font-serif text-neutral-500 hover:text-black transition-colors"
+                  >
+                    Troy@wallandergroup.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* For Sellers Section - Re-framed as an Invitation */}
       <section id="sellers" className="py-24 bg-white border-b border-neutral-100">
         <div className="container mx-auto px-6 max-w-5xl">
