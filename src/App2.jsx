@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { Menu, X, ArrowRight, ArrowLeft, Building2, Users, TrendingUp, Handshake, Mail, CheckCircle, ChevronRight, BarChart3, Microscope, Lock, FileText, Download, Target, ShieldCheck, Zap, Loader2, Heart, Award, Anchor, Quote } from 'lucide-react';
+import SharedThoughts from './components/SharedThoughts.jsx';
 
 // ==========================================
 // PAGE: PARTNER PORTAL
@@ -221,6 +222,13 @@ const Home = () => {
   const [formStatus, setFormStatus] = useState('idle');
 
   useEffect(() => {
+    if (window.location.hash) {
+      const targetId = window.location.hash.replace('#', '');
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    }
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       const sections = ['home', 'culture', 'criteria', 'contact'];
@@ -299,6 +307,10 @@ const Home = () => {
             <NavLink id="culture" label="Our Culture" />
             <NavLink id="criteria" label="Criteria" />
             
+            <Link to="/thoughts" className="text-sm font-serif tracking-wide text-neutral-500 hover:text-black transition-colors duration-300">
+              Shared Thoughts
+            </Link>
+
             <Link to="/jan-wallander" className="text-sm font-serif tracking-wide text-neutral-500 hover:text-black transition-colors duration-300">
               Jan Wallander
             </Link>
@@ -322,6 +334,7 @@ const Home = () => {
           <div className="absolute top-full left-0 w-full bg-white shadow-xl border-t border-neutral-100 py-6 px-6 flex flex-col gap-4 md:hidden animate-in slide-in-from-top-5">
             <button onClick={() => scrollToSection('culture')} className="text-left text-neutral-600 font-serif text-lg py-2">Our Culture</button>
             <button onClick={() => scrollToSection('criteria')} className="text-left text-neutral-600 font-serif text-lg py-2">Criteria</button>
+            <Link to="/thoughts" className="text-left text-neutral-600 font-serif text-lg py-2">Shared Thoughts</Link>
             <Link to="/jan-wallander" className="text-left text-neutral-600 font-serif text-lg py-2">Jan Wallander</Link>
             <Link to="/partners" className="text-left text-neutral-600 font-serif text-lg py-2 flex items-center gap-2"><Lock size={16}/> Partners</Link>
             <button onClick={() => scrollToSection('contact')} className="bg-black text-white py-3 mt-4 text-center font-serif">Contact Us</button>
@@ -627,6 +640,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/jan-wallander" element={<JanWallander />} />
+        <Route path="/thoughts" element={<SharedThoughts />} />
+        <Route path="/thoughts/:slug" element={<SharedThoughts />} />
+        <Route path="/shared-thoughts" element={<SharedThoughts />} />
+        <Route path="/shared-thoughts/:slug" element={<SharedThoughts />} />
         <Route path="/partners" element={<PartnerPortal />} />
       </Routes>
     </BrowserRouter>
