@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { Menu, X, ArrowRight, ArrowLeft, Building2, Users, TrendingUp, Handshake, Mail, CheckCircle, ChevronRight, BarChart3, Microscope, Lock, FileText, Download, Target, ShieldCheck, Zap, Loader2, Heart, Award, Anchor, Quote } from 'lucide-react';
+import { Menu, X, ArrowRight, ArrowLeft, Building2, Users, TrendingUp, Handshake, Mail, CheckCircle, ChevronRight, BarChart3, Microscope, Lock, FileText, Download, Target, ShieldCheck, Zap, Loader2, Heart, Award, Anchor, Quote, MapPin, Clock, Waves } from 'lucide-react';
 import SharedThoughts from './components/SharedThoughts.jsx';
 
 // ==========================================
@@ -143,7 +143,7 @@ const JanWallander = () => {
           </div>
           <h1 className="text-4xl md:text-6xl font-serif text-black leading-tight mb-8">
             Jan Wallander & <br/>
-            <span className="italic text-neutral-500">The Case for Decentralization</span>
+            <span className="text-neutral-500">The Case for Decentralization</span>
           </h1>
           <p className="text-xl text-neutral-600 max-w-2xl mx-auto font-light leading-relaxed">
             The philosophy of Wallander Group is rooted in the work of Dr. Jan Wallander, the Swedish economist who revolutionized banking by dismantling hierarchy and empowering the frontline.
@@ -304,7 +304,8 @@ const Home = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <NavLink id="culture" label="Our Culture" />
+            <NavLink id="about" label="About Us" />
+            <NavLink id="promise" label="The Promise" />
             <NavLink id="criteria" label="Criteria" />
             
             <Link to="/thoughts" className="text-sm font-serif tracking-wide text-neutral-500 hover:text-black transition-colors duration-300">
@@ -332,7 +333,8 @@ const Home = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="absolute top-full left-0 w-full bg-white shadow-xl border-t border-neutral-100 py-6 px-6 flex flex-col gap-4 md:hidden animate-in slide-in-from-top-5">
-            <button onClick={() => scrollToSection('culture')} className="text-left text-neutral-600 font-serif text-lg py-2">Our Culture</button>
+            <button onClick={() => scrollToSection('about')} className="text-left text-neutral-600 font-serif text-lg py-2">About Us</button>
+            <button onClick={() => scrollToSection('promise')} className="text-left text-neutral-600 font-serif text-lg py-2">The Promise</button>
             <button onClick={() => scrollToSection('criteria')} className="text-left text-neutral-600 font-serif text-lg py-2">Criteria</button>
             <Link to="/thoughts" className="text-left text-neutral-600 font-serif text-lg py-2">Shared Thoughts</Link>
             <Link to="/jan-wallander" className="text-left text-neutral-600 font-serif text-lg py-2">Jan Wallander</Link>
@@ -347,8 +349,7 @@ const Home = () => {
         <div className="container mx-auto max-w-5xl">
           <div className="max-w-4xl animate-in fade-in slide-in-from-bottom-8 duration-700">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-black leading-[1.1] mb-8">
-              Building the home of choice for makers of
-              <span className="italic"> mission-critical, proprietary products.</span>
+              Building the home of choice for makers of mission-critical, proprietary products.
             </h1>
             <p className="text-lg md:text-xl text-neutral-600 mb-12 leading-relaxed max-w-2xl font-light">
               Wallander Group is a decentralized holding company assembling a collective of exceptional niche manufacturers. We acquire and partner with IP owners, and we invest in the next generation of leaders to carry your legacy forward.
@@ -365,69 +366,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Our Culture Section (People-First & SOF Truths) */}
-      <section id="culture" className="py-24 bg-neutral-900 text-white">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <div className="mb-16">
-            <div className="inline-block px-3 py-1 bg-neutral-800 text-neutral-400 text-xs font-bold tracking-widest uppercase mb-6 font-serif border border-neutral-700">Our Culture</div>
-            <h2 className="text-3xl md:text-5xl font-serif mb-6 leading-tight max-w-2xl">
-              Extraordinary outcomes are driven by empowered people.
-            </h2>
-            <p className="text-neutral-400 max-w-2xl text-lg font-light">
-              Inspired by the radical decentralization of Jan Wallander and the enduring truths of Special Operations Forces, we operate differently. We are building an environment where elite operators want to spend their careers.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-px bg-neutral-800 border border-neutral-800">
-            {/* Culture Pillar 1: Humans over Hardware */}
-            <div className="bg-neutral-900 p-10 hover:bg-neutral-800/50 transition-colors">
-              <span className="text-emerald-500 font-serif text-2xl mb-4 block">01</span>
-              <h3 className="text-2xl font-serif mb-4 flex items-center gap-3">
-                <Heart size={24} className="text-emerald-500" />
-                Humans Over Hardware
-              </h3>
-              <p className="text-neutral-400 leading-relaxed font-light">
-                Equipment and facilities are useless without the right team. We put people first. Our primary game plan is to identify, place, and invest heavily in the next generation of leaders who will protect your culture and drive your company's next chapter.
-              </p>
-            </div>
-            {/* Culture Pillar 2: Quality over Quantity */}
-            <div className="bg-neutral-900 p-10 hover:bg-neutral-800/50 transition-colors">
-              <span className="text-emerald-500 font-serif text-2xl mb-4 block">02</span>
-              <h3 className="text-2xl font-serif mb-4 flex items-center gap-3">
-                <Award size={24} className="text-emerald-500" />
-                Quality Over Quantity
-              </h3>
-              <p className="text-neutral-400 leading-relaxed font-light">
-                Excellence cannot be mass-produced. We do not aggregate hundreds of companies to flip them for a quick return. We are highly selective, choosing to partner only with exceptional, proprietary product businesses, and we hold them forever.
-              </p>
-            </div>
-            {/* Culture Pillar 3: Decentralized Execution */}
-            <div className="bg-neutral-900 p-10 hover:bg-neutral-800/50 transition-colors">
-              <span className="text-emerald-500 font-serif text-2xl mb-4 block">03</span>
-              <h3 className="text-2xl font-serif mb-4 flex items-center gap-3">
-                <Users size={24} className="text-emerald-500" />
-                Decentralized Execution
-              </h3>
-              <p className="text-neutral-400 leading-relaxed font-light">
-                Decisions should be made as close to the customer as possible. We strip away headquarters bureaucracy, abolishing rigid political budgets, and provide our operating companies with complete autonomy to execute their mission.
-              </p>
-            </div>
-            {/* Culture Pillar 4: Enduring Preparation */}
-            <div className="bg-neutral-900 p-10 hover:bg-neutral-800/50 transition-colors">
-              <span className="text-emerald-500 font-serif text-2xl mb-4 block">04</span>
-              <h3 className="text-2xl font-serif mb-4 flex items-center gap-3">
-                <Anchor size={24} className="text-emerald-500" />
-                Enduring Preparation
-              </h3>
-              <p className="text-neutral-400 leading-relaxed font-light">
-                True competence cannot be created in a crisis. We take a multi-decade approach to capital allocation, ensuring our businesses have the resilient balance sheets, robust systems, and continuous talent development needed to thrive in any environment.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Us / Leadership Section */}
+      {/* About Us / Leadership Section (Directly after Hero) */}
       <section id="about" className="py-24 bg-white border-b border-neutral-200">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="mb-16 text-center max-w-3xl mx-auto">
@@ -524,39 +463,100 @@ const Home = () => {
         </div>
       </section>
 
-      {/* For Sellers Section - Re-framed as an Invitation */}
-      <section id="sellers" className="py-24 bg-white border-b border-neutral-100">
-        <div className="container mx-auto px-6 max-w-5xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-serif text-black mb-6">Join the Ultimate Home for Engineered Products</h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto font-light">
-              We aren't just buying businesses; we are building a destination. We offer a permanent partnership for owners who want their life's work to reach new heights.
+      {/* The Wallander Promise & Principles: Commitments to Founders */}
+      <section id="promise" className="py-24 bg-white border-b border-neutral-100">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <div className="inline-block px-3 py-1 bg-black text-white text-xs font-bold tracking-widest uppercase mb-6 font-serif">
+              The Wallander Promise
+            </div>
+            <h2 className="text-3xl md:text-5xl font-serif text-black leading-tight mb-6">
+              What We Promise Every Founder We Partner With
+            </h2>
+            <p className="text-lg text-neutral-600 font-light leading-relaxed">
+              You spent decades building your business, your team, and your reputation. Guided by the enduring truths of Special Operations and radical decentralization, we exist to protect what you built—not flip it, strip it, or relocate it.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-8 bg-neutral-50 hover:bg-white border border-neutral-100 hover:border-neutral-200 transition-all hover:shadow-lg group">
-              <Users size={32} className="text-black mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-serif font-bold mb-4">Next-Gen Leadership</h3>
-              <p className="text-neutral-600 leading-relaxed">
-                We specialize in transition. If you are ready to step back, we bring in or elevate elite operators to take the helm, preserving your culture while infusing new energy into your life's work.
-              </p>
-            </div>
-            
-            <div className="p-8 bg-neutral-50 hover:bg-white border border-neutral-100 hover:border-neutral-200 transition-all hover:shadow-lg group">
-              <Building2 size={32} className="text-black mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-serif font-bold mb-4">Permanent Capital</h3>
-              <p className="text-neutral-600 leading-relaxed">
-                Unlike traditional private equity, we have no mandate to sell. Your company will not be flipped, absorbed, or relocated. It becomes a permanent pillar in our decentralized collective.
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            {/* Commitment 1: Operations Stay Local */}
+            <div className="p-8 md:p-10 bg-neutral-50 border border-neutral-200 hover:border-black transition-colors">
+              <div className="w-12 h-12 bg-black text-white flex items-center justify-center mb-6">
+                <MapPin size={24} />
+              </div>
+              <h3 className="text-2xl font-serif font-bold text-black mb-3">Operations Stay Local</h3>
+              <p className="text-neutral-600 font-light leading-relaxed">
+                We will never relocate your facility, move your machines, or consolidate your operations into a distant plant. Your business was built by your community, and that is where it stays.
               </p>
             </div>
 
-            <div className="p-8 bg-neutral-50 hover:bg-white border border-neutral-100 hover:border-neutral-200 transition-all hover:shadow-lg group">
-              <ShieldCheck size={32} className="text-black mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-xl font-serif font-bold mb-4">Operational Autonomy</h3>
-              <p className="text-neutral-600 leading-relaxed">
-                We believe you built a great business for a reason. We do not seek destructive "synergies" or force integration. We provide strategic support and capital, but leave the daily operations to the unit.
+            {/* Commitment 2: Your People Are Protected */}
+            <div className="p-8 md:p-10 bg-neutral-50 border border-neutral-200 hover:border-black transition-colors">
+              <div className="w-12 h-12 bg-black text-white flex items-center justify-center mb-6">
+                <Users size={24} />
+              </div>
+              <h3 className="text-2xl font-serif font-bold text-black mb-3">Your People Are Protected</h3>
+              <p className="text-neutral-600 font-light leading-relaxed">
+                Equipment and facilities are useless without the right team. We put people first: honoring your workforce, protecting frontline tenure, and investing heavily in the next generation of leaders so your culture endures.
               </p>
+            </div>
+
+            {/* Commitment 3: Transition on Your Terms */}
+            <div className="p-8 md:p-10 bg-neutral-50 border border-neutral-200 hover:border-black transition-colors">
+              <div className="w-12 h-12 bg-black text-white flex items-center justify-center mb-6">
+                <Clock size={24} />
+              </div>
+              <h3 className="text-2xl font-serif font-bold text-black mb-3">Transition on Your Terms</h3>
+              <p className="text-neutral-600 font-light leading-relaxed">
+                Whether you want to step back in six months to spend time with your family, or remain actively engaged for years, we shape the transition around your life—not an arbitrary private equity fund deadline.
+              </p>
+            </div>
+
+            {/* Commitment 4: Permanent Capital & Autonomy */}
+            <div className="p-8 md:p-10 bg-neutral-50 border border-neutral-200 hover:border-black transition-colors">
+              <div className="w-12 h-12 bg-black text-white flex items-center justify-center mb-6">
+                <ShieldCheck size={24} />
+              </div>
+              <h3 className="text-2xl font-serif font-bold text-black mb-3">Permanent Capital & Autonomy</h3>
+              <p className="text-neutral-600 font-light leading-relaxed">
+                Inspired by Jan Wallander’s radical decentralization, we buy to hold forever. We strip away bureaucracy, reject reckless debt, and empower the operators closest to the customer with genuine autonomy.
+              </p>
+            </div>
+          </div>
+
+          {/* Tailored Engagement Phases */}
+          <div className="bg-neutral-900 text-white p-8 md:p-12">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <h3 className="text-2xl md:text-3xl font-serif mb-3">A Thoughtful, Tailored Approach</h3>
+              <p className="text-neutral-400 font-light text-sm">
+                We move deliberately and respectfully. Every engagement is custom-built around your personal goals, your team, and complete confidentiality.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="border-t border-neutral-700 pt-6">
+                <span className="text-emerald-500 font-serif text-lg font-bold block mb-2">Phase 01</span>
+                <h4 className="text-lg font-serif text-white font-bold mb-2">Getting to Know One Another</h4>
+                <p className="text-neutral-400 font-light text-sm leading-relaxed">
+                  We believe getting to know one another is fundamental. Before looking at spreadsheets, we focus on whether we align on ambitions, goals, and values as people.
+                </p>
+              </div>
+
+              <div className="border-t border-neutral-700 pt-6">
+                <span className="text-emerald-500 font-serif text-lg font-bold block mb-2">Phase 02</span>
+                <h4 className="text-lg font-serif text-white font-bold mb-2">A Clear, Prudent Offer</h4>
+                <p className="text-neutral-400 font-light text-sm leading-relaxed">
+                  A straightforward offer without predatory games, excessive debt, or drawn-out diligence interruptions to your operation.
+                </p>
+              </div>
+
+              <div className="border-t border-neutral-700 pt-6">
+                <span className="text-emerald-500 font-serif text-lg font-bold block mb-2">Phase 03</span>
+                <h4 className="text-lg font-serif text-white font-bold mb-2">Executing Your Plan</h4>
+                <p className="text-neutral-400 font-light text-sm leading-relaxed">
+                  We execute the plan you designed with us. That may mean a gradual, dignified handoff to next-generation leaders, or it may mean no operational change at all—with you remaining firmly at the helm.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -580,53 +580,61 @@ const Home = () => {
                 <Target size={28} className="text-black mb-6" />
                 <h3 className="text-xl font-serif font-bold mb-3">Critical, but Small</h3>
                 <p className="text-neutral-600 font-light leading-relaxed text-sm">
-                  The product is absolutely critical to the customer's application, but represents a small percentage of the total bill of materials. Smaller dollar value in relation to the overall system.
+                  The product is absolutely vital to the customer's application, but represents a small percentage of the total bill of materials, affording strong pricing power.
                 </p>
               </div>
+
               <div className="p-8 border border-neutral-200 bg-white group hover:border-black transition-colors">
-                <Microscope size={28} className="text-black mb-6" />
-                <h3 className="text-xl font-serif font-bold mb-3">Highly Engineered</h3>
+                <Award size={28} className="text-black mb-6" />
+                <h3 className="text-xl font-serif font-bold mb-3">Proven Track Record of Products</h3>
                 <p className="text-neutral-600 font-light leading-relaxed text-sm">
-                  Designed for purpose, IP-heavy, and highly specialized. We acquire businesses making unique, proprietary products—ranging from parachutes to specialized gratings and precision mirrors.
+                  A demonstrated history of reliable, proprietary products that customers depend upon. We look for established, field-tested designs—not speculative or unproven concepts.
                 </p>
               </div>
+
               <div className="p-8 border border-neutral-200 bg-white group hover:border-black transition-colors">
-                <Zap size={28} className="text-black mb-6" />
-                <h3 className="text-xl font-serif font-bold mb-3">Recurring</h3>
+                <Users size={28} className="text-black mb-6" />
+                <h3 className="text-xl font-serif font-bold mb-3">Strong, Committed Team</h3>
                 <p className="text-neutral-600 font-light leading-relaxed text-sm">
-                  Recurring sale profile with strong aftermarket content. The business features longer product lifecycles and maintains 90%+ gross customer retention.
+                  A dedicated, capable frontline workforce with deep technical know-how. We put people first, preserve company culture, and invest in the next generation of leadership.
                 </p>
               </div>
+
               <div className="p-8 border border-neutral-200 bg-white group hover:border-black transition-colors">
-                <ShieldCheck size={28} className="text-black mb-6" />
-                <h3 className="text-xl font-serif font-bold mb-3">Specified</h3>
+                <Waves size={28} className="text-black mb-6" />
+                <h3 className="text-xl font-serif font-bold mb-3">Comfortable with Non-Linear Revenue</h3>
                 <p className="text-neutral-600 font-light leading-relaxed text-sm">
-                  Requires regulatory specifications and validation. The components are specified onto OEM programs that possess strong, underlying secular growth dynamics.
+                  While we welcome recurring aftermarket sales and specified OEM programs, they are not mandatory. We understand that niche manufacturing has project cycles and non-linear demand—our permanent capital lets us think in decades, not quarters.
                 </p>
               </div>
             </div>
 
             {/* Financial Characteristics */}
             <div className="lg:col-span-1">
-              <div className="bg-black text-white p-10 h-full shadow-xl mb-8">
-                <h3 className="text-2xl font-serif mb-8 border-b border-neutral-800 pb-4">Financial Characteristics</h3>
-                
-                <div className="space-y-8">
-                  <div>
-                    <span className="text-4xl font-serif block mb-1">$1-5mm</span>
-                    <span className="text-neutral-400 text-sm tracking-widest uppercase font-bold">EBIT / EBITDA</span>
-                  </div>
-                  <div>
-                    <span className="text-4xl font-serif block mb-1">&gt; 50%</span>
-                    <span className="text-neutral-400 text-sm tracking-widest uppercase font-bold">Gross Margins</span>
-                  </div>
-                  <div>
-                    <span className="text-4xl font-serif block mb-1">&gt; 0%</span>
-                    <span className="text-neutral-400 text-sm tracking-widest uppercase font-bold">Revenue Growth</span>
-                  </div>
-                  <div>
-                    <span className="text-4xl font-serif block mb-1">&lt; 5%</span>
-                    <span className="text-neutral-400 text-sm tracking-widest uppercase font-bold">Capex % of Sales</span>
+              <div className="bg-black text-white p-10 h-full shadow-xl mb-8 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-2xl font-serif mb-8 border-b border-neutral-800 pb-4">Financial Profile</h3>
+                  
+                  <div className="space-y-8">
+                    <div>
+                      <span className="text-4xl font-serif block mb-1">$500k – $5mm</span>
+                      <span className="text-neutral-400 text-xs tracking-widest uppercase font-bold">EBIT / Cash Flow</span>
+                      <p className="text-neutral-400 text-xs mt-1 font-light">Flexible for smaller, exceptional niche businesses.</p>
+                    </div>
+                    <div>
+                      <span className="text-4xl font-serif block mb-1">&gt; 40%</span>
+                      <span className="text-neutral-400 text-xs tracking-widest uppercase font-bold">Gross Margins</span>
+                      <p className="text-neutral-400 text-xs mt-1 font-light">Reflecting proprietary value and pricing power.</p>
+                    </div>
+                    <div>
+                      <span className="text-4xl font-serif block mb-1">Flexible</span>
+                      <span className="text-neutral-400 text-xs tracking-widest uppercase font-bold">Revenue Pattern</span>
+                      <p className="text-neutral-400 text-xs mt-1 font-light">Non-linear, project-driven, or cyclical demand is welcome.</p>
+                    </div>
+                    <div>
+                      <span className="text-4xl font-serif block mb-1">&lt; 10%</span>
+                      <span className="text-neutral-400 text-xs tracking-widest uppercase font-bold">Maintenance Capex</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -634,28 +642,81 @@ const Home = () => {
 
           </div>
 
-          {/* New Area of Interest */}
-          <div className="mt-12 bg-white p-8 md:p-12 border border-neutral-200 flex flex-col md:flex-row gap-12 items-center shadow-sm">
-             <div className="md:w-1/2">
-                <h2 className="text-3xl md:text-4xl font-serif text-black mb-6">Proprietary Products & IP Owners</h2>
-                <p className="text-neutral-600 text-lg mb-0 font-light leading-relaxed">
-                  We are focused exclusively on proprietary product owners and original equipment manufacturers (OEMs). <strong className="text-black">We do not acquire build-to-print or contract manufacturers.</strong> We look for IP-heavy, niche businesses with deep engineering expertise.
+          {/* Representative Products & Instruments (Options 1 & 2 combined) */}
+          <div className="mt-12 bg-white p-8 md:p-12 border border-neutral-200 shadow-sm">
+             <div className="max-w-3xl mb-10">
+                <div className="inline-block px-2.5 py-1 bg-neutral-100 text-neutral-700 text-xs font-bold tracking-widest uppercase mb-3 font-serif">
+                  Product Archetypes
+                </div>
+                <h2 className="text-3xl md:text-4xl font-serif text-black mb-4">
+                  Proprietary Instruments, Devices & Engineered Components
+                </h2>
+                <p className="text-neutral-600 text-lg font-light leading-relaxed">
+                  We partner with IP owners and original manufacturers across a broad technical spectrum. Whether you build complete standalone instruments or mission-critical embedded subsystems, if your product solves a difficult problem for demanding customers, it fits our criteria.
                 </p>
              </div>
-             <div className="md:w-1/2 w-full">
-                <div className="bg-neutral-50 p-6 border border-neutral-200">
-                  <h4 className="font-serif font-bold mb-6 flex items-center gap-2 border-b border-neutral-200 pb-4">
-                    <Microscope size={18} /> Representative Components
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 text-sm text-neutral-600">
-                    <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-black rounded-full shrink-0"></div>Precision Optics & Mirrors</div>
-                    <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-black rounded-full shrink-0"></div>Specialized Gratings</div>
-                    <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-black rounded-full shrink-0"></div>Life Safety (e.g., Parachutes)</div>
-                    <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-black rounded-full shrink-0"></div>Scientific Instruments</div>
-                    <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-black rounded-full shrink-0"></div>Oceanographic Sensors</div>
-                    <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-black rounded-full shrink-0"></div>RF & Microwave Systems</div>
+
+             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* Archetype 1: Test & Measurement */}
+                <div className="bg-neutral-50 p-6 border border-neutral-200 hover:border-black transition-colors">
+                  <div className="w-10 h-10 bg-white border border-neutral-200 flex items-center justify-center text-black mb-4">
+                    <Microscope size={20} />
+                  </div>
+                  <h4 className="font-serif font-bold text-lg text-black mb-2">Test & Measurement</h4>
+                  <p className="text-neutral-600 font-light text-sm leading-relaxed mb-3">
+                    Benchtop, laboratory, and field-portable instruments where accuracy, calibration, and repeatability are paramount.
+                  </p>
+                  <div className="text-xs text-neutral-400 font-serif">
+                    e.g., Optical instruments, spectrometers, analyzers
                   </div>
                 </div>
+
+                {/* Archetype 2: Sensors & Detection */}
+                <div className="bg-neutral-50 p-6 border border-neutral-200 hover:border-black transition-colors">
+                  <div className="w-10 h-10 bg-white border border-neutral-200 flex items-center justify-center text-black mb-4">
+                    <Zap size={20} />
+                  </div>
+                  <h4 className="font-serif font-bold text-lg text-black mb-2">Sensors & Detection</h4>
+                  <p className="text-neutral-600 font-light text-sm leading-relaxed mb-3">
+                    Proprietary sensing hardware and transducers operating in harsh, industrial, marine, or scientific environments.
+                  </p>
+                  <div className="text-xs text-neutral-400 font-serif">
+                    e.g., Oceanographic sensors, environmental monitors
+                  </div>
+                </div>
+
+                {/* Archetype 3: Engineered Components */}
+                <div className="bg-neutral-50 p-6 border border-neutral-200 hover:border-black transition-colors">
+                  <div className="w-10 h-10 bg-white border border-neutral-200 flex items-center justify-center text-black mb-4">
+                    <Target size={20} />
+                  </div>
+                  <h4 className="font-serif font-bold text-lg text-black mb-2">Engineered Components</h4>
+                  <p className="text-neutral-600 font-light text-sm leading-relaxed mb-3">
+                    High-precision mechanical, optical, or RF subsystems specified directly into critical customer equipment.
+                  </p>
+                  <div className="text-xs text-neutral-400 font-serif">
+                    e.g., Precision optics, gratings, RF/microwave modules
+                  </div>
+                </div>
+
+                {/* Archetype 4: Mission-Critical Products */}
+                <div className="bg-neutral-50 p-6 border border-neutral-200 hover:border-black transition-colors">
+                  <div className="w-10 h-10 bg-white border border-neutral-200 flex items-center justify-center text-black mb-4">
+                    <ShieldCheck size={20} />
+                  </div>
+                  <h4 className="font-serif font-bold text-lg text-black mb-2">Mission-Critical Products</h4>
+                  <p className="text-neutral-600 font-light text-sm leading-relaxed mb-3">
+                    Specialized structures, enclosures, and vital subsystems engineered for extreme environments or integrated into larger defense, aerospace, and marine platforms.
+                  </p>
+                  <div className="text-xs text-neutral-400 font-serif">
+                    e.g., Composite shelters, radomes, ruggedized housings, mission gear
+                  </div>
+                </div>
+             </div>
+
+             <div className="mt-8 pt-6 border-t border-neutral-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs text-neutral-500 font-serif">
+                <span>The common thread is proprietary engineering and high consequence of failure.</span>
+                <span className="text-neutral-800 font-bold">Open to adjacent technical niches and unique applications.</span>
              </div>
           </div>
         </div>
@@ -752,13 +813,13 @@ const Home = () => {
               </h4>
               <ul className="space-y-3 text-sm font-serif text-neutral-400">
                 <li>
-                  <button onClick={() => scrollToSection('culture')} className="hover:text-white transition-colors">
-                    Our Culture
+                  <button onClick={() => scrollToSection('about')} className="hover:text-white transition-colors">
+                    Leadership & Bios
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => scrollToSection('about')} className="hover:text-white transition-colors">
-                    Leadership & Bios
+                  <button onClick={() => scrollToSection('promise')} className="hover:text-white transition-colors">
+                    The Wallander Promise
                   </button>
                 </li>
                 <li>
