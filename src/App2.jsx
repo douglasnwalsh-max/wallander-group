@@ -724,6 +724,114 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Comprehensive Site Footer */}
+      <footer className="bg-neutral-950 text-white pt-20 pb-12 border-t border-neutral-800">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 pb-16 border-b border-neutral-800">
+            {/* Column 1: Monogram & Purpose */}
+            <div className="md:col-span-2 space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-white text-black flex items-center justify-center font-serif text-2xl font-normal pt-1">
+                  W
+                </div>
+                <span className="text-2xl font-serif tracking-wide text-white">Wallander Group</span>
+              </div>
+              <p className="text-neutral-400 font-light max-w-sm text-sm leading-relaxed pt-2">
+                A decentralized holding company and permanent home for makers of mission-critical, proprietary products. We acquire, protect, and hold forever.
+              </p>
+              <div className="pt-2 text-xs font-serif text-neutral-500 uppercase tracking-widest">
+                Boston, Massachusetts
+              </div>
+            </div>
+
+            {/* Column 2: Navigation */}
+            <div>
+              <h4 className="text-xs font-serif uppercase tracking-widest text-neutral-400 font-bold mb-6">
+                Navigation
+              </h4>
+              <ul className="space-y-3 text-sm font-serif text-neutral-400">
+                <li>
+                  <button onClick={() => scrollToSection('culture')} className="hover:text-white transition-colors">
+                    Our Culture
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => scrollToSection('about')} className="hover:text-white transition-colors">
+                    Leadership & Bios
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => scrollToSection('criteria')} className="hover:text-white transition-colors">
+                    Acquisition Criteria
+                  </button>
+                </li>
+                <li>
+                  <Link to="/thoughts" className="hover:text-white transition-colors">
+                    Shared Thoughts
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/jan-wallander" className="hover:text-white transition-colors">
+                    Jan Wallander
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/partners" className="hover:text-white transition-colors flex items-center gap-1.5">
+                    <Lock size={12} /> Partner Portal
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Contact & Office */}
+            <div>
+              <h4 className="text-xs font-serif uppercase tracking-widest text-neutral-400 font-bold mb-6">
+                Offices & Inquiries
+              </h4>
+              <div className="space-y-4 text-sm font-light text-neutral-400">
+                <div>
+                  <div className="text-white font-serif mb-1">Boston Headquarters</div>
+                  <p className="text-xs leading-relaxed text-neutral-400">
+                    One Beacon Street, Floor 15<br />
+                    Boston, MA 02108
+                  </p>
+                </div>
+                <div className="pt-2">
+                  <div className="text-xs font-serif uppercase tracking-widest text-neutral-500 mb-1">General Inquiries</div>
+                  <a href="mailto:info@wallandergroup.com" className="text-sm font-serif text-white hover:underline block">
+                    info@wallandergroup.com
+                  </a>
+                </div>
+                <div className="pt-1 flex flex-col gap-1 text-xs">
+                  <a href="mailto:Doug@wallandergroup.com" className="text-neutral-400 hover:text-white transition-colors">
+                    Doug Walsh: <span className="text-neutral-300 font-serif">Doug@wallandergroup.com</span>
+                  </a>
+                  <a href="mailto:Troy@wallandergroup.com" className="text-neutral-400 hover:text-white transition-colors">
+                    Troy Renauld: <span className="text-neutral-300 font-serif">Troy@wallandergroup.com</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Row */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-serif text-neutral-500">
+            <div>
+              &copy; {new Date().getFullYear()} Wallander Group LLC. All rights reserved.
+            </div>
+            <div className="flex items-center gap-6">
+              <span>Permanent Capital</span>
+              <span>•</span>
+              <span>Decentralized Leadership</span>
+              <span>•</span>
+              <button onClick={() => scrollToSection('home')} className="hover:text-white transition-colors">
+                Back to Top ↑
+              </button>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
