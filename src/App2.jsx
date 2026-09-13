@@ -395,7 +395,7 @@ const Home = () => {
                 <h3 className="text-2xl font-serif font-bold text-black mb-1">Doug Walsh</h3>
                 <div className="text-sm font-serif text-neutral-500 uppercase tracking-widest mb-3">Co-Founder</div>
                 <div className="inline-block bg-white border border-neutral-200 px-2.5 py-1 text-xs text-neutral-700 font-medium mb-4">
-                  West Point • HBS • Army Special Ops
+                  West Point • HBS • Army
                 </div>
                 <p className="text-neutral-600 font-light leading-relaxed text-sm mb-6">
                   Former Army Special Operations officer and expert in building high-performance technical teams. Dedicated to preserving the precision and culture of New England’s technical firms. Doug and his wife reside in Quincy, MA with their two children and beloved mutt.
