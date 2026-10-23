@@ -36,7 +36,7 @@ const PartnerPortal = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const correctPassword = 'GreatCod26!'; // Password
+    const correctPassword = ''; // Decommissioned
     
     if (passwordInput === correctPassword) {
       setIsAuthenticated(true);

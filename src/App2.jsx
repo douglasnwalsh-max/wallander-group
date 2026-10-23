@@ -2,41 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { Menu, X, ArrowRight, ArrowLeft, Building2, Users, TrendingUp, Handshake, Mail, CheckCircle, ChevronRight, BarChart3, Microscope, Lock, FileText, Download, Target, ShieldCheck, Zap, Loader2, Heart, Award, Anchor, Quote, MapPin, Clock, Waves } from 'lucide-react';
 import SharedThoughts from './components/SharedThoughts.jsx';
+import SEO from './components/SEO.jsx';
+import { PAGE_METADATA } from './data/seoData.js';
 
 // ==========================================
-// PAGE: PARTNER PORTAL
+// PAGE: PARTNER PORTAL (SECURE DATA ROOM GATEWAY)
 // ==========================================
-const PartnerPortal = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [passwordInput, setPasswordInput] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
-
-  const partnerDocuments = [
-    { 
-      title: 'Q4 2025 Investor Letter', 
-      date: 'Dec 2025', 
-      filename: 'q4-letter.pdf' 
-    },
-    { 
-      title: 'Annual Report 2025', 
-      date: 'Jan 2026', 
-      filename: 'annual-report-2025.pdf' 
-    }
-  ];
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const correctPassword = 'GreatCod26!'; // Password
-    if (passwordInput === correctPassword) {
-      setIsAuthenticated(true);
-      setErrorMsg('');
-    } else {
-      setErrorMsg('Incorrect password. Please contact info@wallandergroup.com.');
-    }
-  };
-
+export const PartnerPortal = () => {
   return (
-    <div className="font-sans text-neutral-800 bg-white min-h-screen selection:bg-neutral-200">
+    <div className="font-sans text-neutral-800 bg-white min-h-screen selection:bg-neutral-200 flex flex-col justify-between">
+      <SEO {...PAGE_METADATA['/partners']} />
       <nav className="fixed w-full z-50 bg-white/95 backdrop-blur-md py-4 border-b border-neutral-200">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 text-neutral-500 hover:text-black transition-colors font-serif">
@@ -49,67 +24,60 @@ const PartnerPortal = () => {
         </div>
       </nav>
 
-      <section className="pt-32 pb-20 px-6">
+      <section className="pt-36 pb-20 px-6 flex-grow flex items-center">
         <div className="container mx-auto max-w-2xl">
-           {!isAuthenticated ? (
-             <div className="bg-neutral-900 text-white p-10 rounded-sm shadow-xl mt-10">
-               <div className="flex flex-col items-center text-center gap-6">
-                 <Lock size={48} className="text-neutral-500" />
-                 <h1 className="text-3xl font-serif">Partner Portal</h1>
-                 <p className="text-neutral-400 font-light max-w-md">
-                   Access to quarterly letters, annual reports, and financial statements is restricted to partners of Wallander Group.
-                 </p>
-                 <form onSubmit={handleLogin} className="w-full max-w-sm flex flex-col gap-3">
-                   <input 
-                     type="password" 
-                     value={passwordInput}
-                     onChange={(e) => setPasswordInput(e.target.value)}
-                     placeholder="Enter Password" 
-                     className="bg-neutral-800 border border-neutral-600 text-white px-4 py-3 focus:outline-none focus:border-white transition-colors placeholder:text-neutral-600"
-                   />
-                   <button type="submit" className="bg-white text-black px-6 py-3 font-serif hover:bg-neutral-200 transition-colors font-bold">
-                     Access Library
-                   </button>
-                   {errorMsg && <p className="text-rose-400 text-sm mt-2">{errorMsg}</p>}
-                 </form>
-               </div>
-             </div>
-           ) : (
-             <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 mt-10">
-                <div className="flex justify-between items-end mb-8 border-b border-neutral-200 pb-4">
-                    <h1 className="text-3xl font-serif">Partner Documents</h1>
-                    <button onClick={() => setIsAuthenticated(false)} className="text-sm text-neutral-500 hover:text-black underline">Log Out</button>
+          <div className="bg-neutral-900 text-white p-10 md:p-14 rounded-sm shadow-xl border border-neutral-800">
+            <div className="flex flex-col items-center text-center gap-6">
+              <div className="w-16 h-16 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center text-neutral-300">
+                <ShieldCheck size={36} />
+              </div>
+
+              <div className="space-y-2">
+                <div className="inline-block px-3 py-1 bg-neutral-800 border border-neutral-700 text-neutral-400 text-xs font-mono uppercase tracking-widest">
+                  Encrypted Investor Data Room
                 </div>
-                
-                <div className="grid gap-4">
-                  {partnerDocuments.map((doc, i) => (
-                    <a 
-                      key={i} 
-                      href={`/${doc.filename}`} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between p-6 bg-neutral-50 border border-neutral-100 hover:border-black transition-colors group cursor-pointer no-underline"
-                    >
-                      <div className="flex items-center gap-4">
-                         <div className="w-10 h-10 bg-white border border-neutral-200 flex items-center justify-center text-neutral-500 group-hover:text-black group-hover:bg-neutral-100 transition-colors">
-                           <FileText size={20} />
-                         </div>
-                         <div>
-                            <span className="font-serif text-lg block text-neutral-800">{doc.title}</span>
-                            <span className="text-xs text-neutral-400 uppercase tracking-widest">{doc.date}</span>
-                         </div>
-                      </div>
-                      <Download size={20} className="text-neutral-400 group-hover:text-black" />
-                    </a>
-                  ))}
-                </div>
-                <p className="mt-8 text-neutral-400 text-sm italic">
-                    Note: This is a secure area. Please do not share these documents externally.
+                <h1 className="text-3xl md:text-4xl font-serif">Partner Portal</h1>
+              </div>
+
+              <p className="text-neutral-300 font-light max-w-lg leading-relaxed text-sm md:text-base">
+                Wallander Group investor communications, quarterly partner letters, and annual operating reports are hosted exclusively within our secure, access-controlled data room.
+              </p>
+
+              <div className="bg-neutral-800/60 border border-neutral-700/60 p-5 rounded text-xs text-neutral-400 text-left w-full space-y-2">
+                <div className="font-medium text-neutral-300 font-serif text-sm">Access Policy</div>
+                <p>
+                  To protect partner confidentiality and proprietary operating data, direct file downloads are disabled on the public web. Active partners receive direct authenticated links for data room access.
                 </p>
-             </div>
-           )}
+              </div>
+
+              <div className="w-full flex flex-col sm:flex-row gap-3 pt-2 justify-center">
+                <a 
+                  href="mailto:info@wallandergroup.com?subject=Partner%20Portal%20Access%20Request&body=Hello%20Wallander%20Group%20Team%2C%0A%0APlease%20provide%20access%20to%20the%20partner%20data%20room%20for%3A%0AName%3A%0AOrganization%20%2F%20Fund%3A%0AEmail%3A"
+                  className="bg-white text-black px-6 py-3 font-serif hover:bg-neutral-200 transition-colors font-bold text-sm text-center flex items-center justify-center gap-2"
+                >
+                  <Mail size={16} />
+                  <span>Request Data Room Access</span>
+                </a>
+                <Link
+                  to="/"
+                  className="bg-neutral-800 border border-neutral-700 text-white px-6 py-3 font-serif hover:bg-neutral-700 transition-colors text-sm text-center"
+                >
+                  Return Home
+                </Link>
+              </div>
+
+              <div className="text-xs text-neutral-500 pt-4 border-t border-neutral-800 w-full flex flex-col sm:flex-row justify-between items-center gap-2">
+                <span>Direct Inquiries: <a href="mailto:info@wallandergroup.com" className="text-neutral-400 hover:text-white underline">info@wallandergroup.com</a></span>
+                <span>Boston, MA</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+
+      <footer className="bg-black text-white py-8 text-center border-t border-neutral-800 text-xs font-serif text-neutral-500">
+        &copy; {new Date().getFullYear()} Wallander Group LLC. Confidential & Proprietary.
+      </footer>
     </div>
   );
 };
@@ -117,13 +85,15 @@ const PartnerPortal = () => {
 // ==========================================
 // PAGE: JAN WALLANDER & DECENTRALIZATION
 // ==========================================
-const JanWallander = () => {
+export const JanWallander = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="font-sans text-neutral-800 bg-white min-h-screen selection:bg-neutral-200">
+      <SEO {...PAGE_METADATA['/']} />
+      <SEO {...PAGE_METADATA['/jan-wallander']} />
       <nav className="fixed w-full z-50 bg-white/95 backdrop-blur-md py-4 border-b border-neutral-200">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 text-neutral-500 hover:text-black transition-colors font-serif">
@@ -215,7 +185,7 @@ const JanWallander = () => {
 // ==========================================
 // PAGE: MAIN HOME PAGE (REVAMPED)
 // ==========================================
-const Home = () => {
+export const Home = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -385,11 +355,17 @@ const Home = () => {
             {/* Doug Walsh */}
             <div className="bg-neutral-50 border border-neutral-200 p-8 md:p-10 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:border-black transition-all hover:shadow-sm">
               <div className="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-full overflow-hidden border-2 border-black/10 shadow-sm bg-neutral-200">
-                <img 
-                  src="/images/doug-walsh.jpg" 
-                  alt="Doug Walsh" 
-                  className="w-full h-full object-cover object-top"
-                />
+                <picture>
+                  <source srcSet="/images/doug-walsh.webp" type="image/webp" />
+                  <img 
+                    src="/images/doug-walsh.jpg" 
+                    alt="Doug Walsh" 
+                    width="144"
+                    height="144"
+                    loading="lazy"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </picture>
               </div>
               <div className="flex-1 text-center sm:text-left">
                 <h3 className="text-2xl font-serif font-bold text-black mb-1">Doug Walsh</h3>
@@ -424,11 +400,17 @@ const Home = () => {
             {/* Troy Renauld */}
             <div className="bg-neutral-50 border border-neutral-200 p-8 md:p-10 flex flex-col sm:flex-row gap-8 items-center sm:items-start hover:border-black transition-all hover:shadow-sm">
               <div className="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-full overflow-hidden border-2 border-black/10 shadow-sm bg-neutral-200">
-                <img 
-                  src="/images/troy-renauld.jpg" 
-                  alt="Troy Renauld" 
-                  className="w-full h-full object-cover object-top"
-                />
+                <picture>
+                  <source srcSet="/images/troy-renauld.webp" type="image/webp" />
+                  <img 
+                    src="/images/troy-renauld.jpg" 
+                    alt="Troy Renauld" 
+                    width="144"
+                    height="144"
+                    loading="lazy"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </picture>
               </div>
               <div className="flex-1 text-center sm:text-left">
                 <h3 className="text-2xl font-serif font-bold text-black mb-1">Troy Renauld</h3>
@@ -898,20 +880,71 @@ const Home = () => {
 };
 
 // ==========================================
+// PAGE: NOT FOUND (404)
+// ==========================================
+export const NotFound = () => {
+  return (
+    <div className="font-sans text-neutral-800 bg-white min-h-screen selection:bg-neutral-200 flex flex-col justify-between">
+      <SEO title="404 - Page Not Found | Wallander Group" noindex={true} />
+      <nav className="fixed w-full z-50 bg-white/95 backdrop-blur-md py-4 border-b border-neutral-200">
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <Link to="/" className="flex items-center gap-2 text-neutral-500 hover:text-black transition-colors font-serif">
+            <ArrowLeft size={20} />
+            <span>Back to Home</span>
+          </Link>
+          <Link to="/" className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-black flex items-center justify-center text-white font-serif text-xl font-normal pt-1">W</div>
+          </Link>
+        </div>
+      </nav>
+
+      <main className="pt-36 pb-20 px-6 flex-grow flex items-center justify-center text-center">
+        <div className="max-w-md mx-auto space-y-6">
+          <div className="w-12 h-12 bg-black text-white font-serif text-2xl flex items-center justify-center mx-auto">
+            W
+          </div>
+          <h1 className="text-4xl font-serif text-black">Page Not Found</h1>
+          <p className="text-neutral-600 font-light leading-relaxed">
+            The page you are looking for does not exist, has been removed, or is temporarily unavailable.
+          </p>
+          <Link 
+            to="/" 
+            className="inline-block bg-black text-white px-8 py-3 font-serif hover:bg-neutral-800 transition-colors text-sm"
+          >
+            Return to Homepage
+          </Link>
+        </div>
+      </main>
+
+      <footer className="bg-black text-white py-8 text-center border-t border-neutral-800 text-xs font-serif text-neutral-500">
+        &copy; {new Date().getFullYear()} Wallander Group LLC.
+      </footer>
+    </div>
+  );
+};
+
+// ==========================================
 // APP ROUTER SETUP
 // ==========================================
+export const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/jan-wallander" element={<JanWallander />} />
+      <Route path="/thoughts" element={<SharedThoughts />} />
+      <Route path="/thoughts/:slug" element={<SharedThoughts />} />
+      <Route path="/shared-thoughts" element={<SharedThoughts />} />
+      <Route path="/shared-thoughts/:slug" element={<SharedThoughts />} />
+      <Route path="/partners" element={<PartnerPortal />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
+
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/jan-wallander" element={<JanWallander />} />
-        <Route path="/thoughts" element={<SharedThoughts />} />
-        <Route path="/thoughts/:slug" element={<SharedThoughts />} />
-        <Route path="/shared-thoughts" element={<SharedThoughts />} />
-        <Route path="/shared-thoughts/:slug" element={<SharedThoughts />} />
-        <Route path="/partners" element={<PartnerPortal />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   );
 };

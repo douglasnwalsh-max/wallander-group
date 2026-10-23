@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ShieldCheck, Heart, TrendingUp, Anchor, CheckCircle, Quote, Clock, Calendar, Sparkles, Building2, Layers } from 'lucide-react';
 import { articles } from '../data/articles';
+import SEO from './SEO';
+import { PAGE_METADATA } from '../data/seoData';
 
 // ==========================================
 // COMPONENT: INDIVIDUAL ARTICLE - SELLING ISN'T QUITTING
@@ -220,9 +222,19 @@ export const SharedThoughts = () => {
   }, [slug]);
 
   const selectedArticle = slug ? articles.find(a => a.slug === slug) : null;
+  const seoData = slug
+    ? (selectedArticle 
+        ? (PAGE_METADATA[`/thoughts/${slug}`] || {
+            title: `${selectedArticle.title} | Wallander Group`,
+            description: selectedArticle.summary,
+            canonical: `https://wallandergroup.com/thoughts/${slug}`
+          })
+        : { title: 'Article Not Found | Wallander Group', noindex: true })
+    : PAGE_METADATA['/thoughts'];
 
   return (
     <div className="font-sans text-neutral-800 bg-white min-h-screen selection:bg-neutral-200 flex flex-col justify-between">
+      <SEO {...seoData} />
       {/* Navbar */}
       <nav className="fixed w-full z-50 bg-white/95 backdrop-blur-md py-4 border-b border-neutral-200">
         <div className="container mx-auto px-6 flex justify-between items-center">
